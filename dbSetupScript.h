@@ -4,5 +4,6 @@
 int createDB();
 int populateDB();
 int queryDB();
+int dropDB();
 
 #endif

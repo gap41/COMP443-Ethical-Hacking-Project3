@@ -7,7 +7,8 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "*.c",
+                //"${file}",
                 "-l",
                 "sqlite3",
                 "-o",
