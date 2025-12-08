@@ -9,10 +9,9 @@ static int callback(void *, int argc, char **argv, char **azColName){
         }else{
             printf("%s = %s\n", azColName[i], "NULL");
         }
-        printf("\n");
-
-        return 0;        
+        printf("\n");       
     }
+    return 0; 
 }
 
 int main(){
