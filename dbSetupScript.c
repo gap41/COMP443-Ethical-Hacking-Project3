@@ -2,28 +2,30 @@
  * 
  * @file dbSetupScript.c
  * 
- * This is the source code to create and populate the database
+ * This is the source code to create, populate and query the database
  * 
  * This is a part of the Project 2 submission for the class COMP-443 Ethical Hacking December 2025
  * 
  */
 
 
-
-/*******************************
+/**********************************
  * Includes
- *******************************/
+ **********************************/
+#include "dbSetupScript.h"
 #include <stdio.h>
 #include <sqlite3.h>
-
 
 /**********************************
  * Prototypes
  **********************************/
 static int callback(void *, int argc, char **argv, char **azColName);
 
+/**********************************
+ * Functions
+ **********************************/
 
-int main(){
+int createDB(){
 
     sqlite3 *db;
     char *zErrMsg = 0; //Error message for when executing the sqlite3_execute() function call
@@ -31,7 +33,7 @@ int main(){
     char *sql;
     const char* data = "Callback was called";
 
-    rc = sqlite3_open("test.db", &db);
+    rc = sqlite3_open("employee.db", &db);
 
 
     if(rc){
@@ -57,6 +59,20 @@ int main(){
         printf("The table has been created\n");
     }
 
+    sqlite3_close(db);
+
+}
+
+int populateDB(){
+
+    sqlite3 *db;
+    char *zErrMsg = 0; //Error message for when executing the sqlite3_execute() function call
+    int rc;
+    char *sql;
+    const char* data = "Callback was called";
+
+    rc = sqlite3_open("employee.db", &db);
+
     sql = "INSERT INTO EMPLOYEES(ID,NAME,AGE,ADDRESS,SALARY) "  \
          "VALUES (1, 'ANDERS', 34, 'Oslo', 540000 ); " \
          "INSERT INTO EMPLOYEES (ID,NAME,AGE,ADDRESS,SALARY) "  \
@@ -75,7 +91,22 @@ int main(){
         printf("The data has been added\n");
     }
 
-    sql = "SELECT * from EMPLOYEES";
+    sqlite3_close(db);
+
+    return 0;
+}
+
+int queryDB(char* query){
+
+    sqlite3 *db;
+    char *zErrMsg = 0; //Error message for when executing the sqlite3_execute() function call
+    int rc;
+    char *sql;
+    const char* data = "Callback was called";
+
+    rc = sqlite3_open("employee.db", &db);
+
+    sql = query;
 
     rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
 
@@ -89,6 +120,7 @@ int main(){
     sqlite3_close(db);
 
     return 0;
+
 }
 
 static int callback(void *, int argc, char **argv, char **azColName){
@@ -100,5 +132,7 @@ static int callback(void *, int argc, char **argv, char **azColName){
         }
         printf("\n");       
     }
+
     return 0; 
+
 }
