@@ -1,18 +1,27 @@
+/**
+ * 
+ * @file dbSetupScript.c
+ * 
+ * This is the source code to create and populate the database
+ * 
+ * This is a part of the Project 2 submission for the class COMP-443 Ethical Hacking December 2025
+ * 
+ */
+
+
+
+/*******************************
+ * Includes
+ *******************************/
 #include <stdio.h>
 #include <sqlite3.h>
 
 
-static int callback(void *, int argc, char **argv, char **azColName){
-    for(int i = 0; i < argc; i++){
-        if(argv[i] != NULL){
-            printf("%s = %s\n", azColName[i], argv[i]);
-        }else{
-            printf("%s = %s\n", azColName[i], "NULL");
-        }
-        printf("\n");       
-    }
-    return 0; 
-}
+/**********************************
+ * Prototypes
+ **********************************/
+static int callback(void *, int argc, char **argv, char **azColName);
+
 
 int main(){
 
@@ -80,4 +89,16 @@ int main(){
     sqlite3_close(db);
 
     return 0;
+}
+
+static int callback(void *, int argc, char **argv, char **azColName){
+    for(int i = 0; i < argc; i++){
+        if(argv[i] != NULL){
+            printf("%s = %s\n", azColName[i], argv[i]);
+        }else{
+            printf("%s = %s\n", azColName[i], "NULL");
+        }
+        printf("\n");       
+    }
+    return 0; 
 }
