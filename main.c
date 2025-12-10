@@ -65,7 +65,7 @@ int chooseAction(){
 
     //Buffer for the input of the action
     char buff[2];
-    printf("Welcome to the administrator database, choose your action:\n\n");
+    printf("Welcome to the employee database query tool, choose your action:\n\n");
 
     while(!((action > 0) && (action < 6))){
         printf("1. Create the database for the employees\n2. Populate the database for the employees\n3. Search the address for an employee\n4. Drop the database\n5. Exit the program\n\n");

@@ -147,7 +147,7 @@ int queryDB(){
     strcat(query, buff);
     strcat(query, "'");
 
-    // Prone to the input "'; OR 1=1; --" and "'; SELECT * FROM EMPLOYEES; --" This provides the whole table
+    // Prone to the input "'; SELECT * FROM EMPLOYEES; --" This provides the whole table
     // Also prone to drop the table by entering "'; DROP TABLE EMPLOYEES; --" This drops the table and deletes the data in the table
 
 
